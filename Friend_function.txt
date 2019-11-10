@@ -1,0 +1,70 @@
+// Friend function
+//example 8.6
+#include<iostream>
+
+using namespace std;
+
+class Complex
+{
+//frined list
+
+	friend float addreal(Complex&, Complex&);
+	friend float addimag(Complex&, Complex&);
+
+private:
+	float real;
+	float imag;
+
+public:
+	Complex(float = 0, float = 0);
+	void display();
+
+};
+
+
+Complex::Complex(float r1, float im)
+{
+	real = r1;
+	imag = im;
+}
+
+void Complex::display()
+{
+	char sign = '+';
+	if (imag < 0) sign = '-';
+}
+
+//friend implementation
+float addreal(Complex &a, Complex &b)
+{
+	return(a.real + b.real);
+}
+
+float addimag(Complex &a, Complex &b)
+{
+	return(a.imag + b.imag);
+}
+
+int main()
+
+{
+	Complex a(3.2, 5.6), b(1.1, -8.4);
+	float re, im;
+
+	cout << "\n The first complex no. is ";
+	a.display();
+
+
+	cout << "\n The second complex  no. is ";
+
+	b.display();
+
+	re = addreal(a, b);
+	im = addimag(a, b);
+
+	Complex c(re, im);
+	cout << "\n \n The sum of these two complex number is ";
+	c.display();
+
+	return 0;
+}

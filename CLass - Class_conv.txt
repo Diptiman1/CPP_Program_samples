@@ -1,0 +1,116 @@
+#include<iostream>
+#include<iomanip>
+
+//forward declaration of class intDate
+
+using namespace std;
+
+class Intdate;
+
+class Date
+{
+private:
+	int month, day, year;
+public:
+
+	Date(int = 7, int = 4, int = 2001);
+
+	operator Intdate();
+	void showdate();
+
+};
+
+//class declaration for intdate
+
+class Intdate
+{
+private:
+	long yyyymmdd;
+public:
+	Intdate(long = 0);
+	operator Date();
+	void showint();
+
+};
+
+
+//implementation section for date
+
+Date::Date(int mm, int dd, int yyyy)
+{
+	month = mm;
+	day = dd;
+	year = yyyy;
+}
+
+Date::operator Intdate()
+{
+	long temp;
+
+	temp = year * 10000.0 + month * 100.0 + day;
+	return(Intdate(temp));
+	
+}
+
+//member function to display a Date
+void Date::showdate()
+{
+	cout << setfill('0')
+		<< setw(2) << month << '/'
+		<< setw(2) << day << '/'
+		<< setw(2) << year % 100;
+	return;
+}
+
+//implementation section for Intdate
+
+Intdate::Intdate(long ymd)
+{
+	yyyymmdd = ymd;
+}
+
+
+//conversion operator function converting from Intdate to Date class
+Intdate::operator Date() // must return a date object
+{
+	int mo, da, yr;
+
+	yr = int(yyyymmdd / 10000.0);
+	mo = int((yyyymmdd - yr * 100000.0) / 100.0);
+	da = int((yyyymmdd - yr * 100000.0) - mo *100.0);
+
+	return(Date(mo, da, yr));
+}
+
+//member function to display an Intdate
+void Intdate::showint()
+{
+	cout << yyyymmdd;
+	return;
+}
+
+
+int main()
+{
+	Date a(4, 1, 1999), b;
+
+	Intdate c(20011212L), d;
+
+	b = Date(c);
+	d = Intdate(a);
+	cout << " a's date is ";
+	a.showdate();
+	cout << "\n as an intdate object this date is ";
+	d.showint();
+
+	cout << "\n c's date is ";
+
+	c.showint();
+
+	cout << "\n   as a Date object this date is  ";
+	b.showdate();
+	cout << endl;
+
+	return 0;
+
+}

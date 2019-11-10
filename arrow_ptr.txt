@@ -1,0 +1,32 @@
+#include<iostream>
+#include<conio.h>
+#include<stdbool.h>
+#include<string>
+#include<string.h>
+#include<complex.h>
+#include<cmath>
+#include<control.h>
+
+
+using namespace std;
+
+class a {
+public:
+	int a1(){
+	
+		int a2;
+		a2 = 90;
+		return a2;
+
+	}
+};
+
+void main()
+{
+
+	int n;
+	a *obj;
+	n = obj->a1();
+	cout << n << endl;
+
+}

@@ -1,0 +1,104 @@
+#include <iostream>
+#include<iomanip>
+#include<ctype.h>
+
+using namespace std;
+
+const int MAXSTRLEN = 50;
+const float MPRICE = 269.5;
+const float SPRICE = 149.5;
+
+struct Customer
+{
+	char name[MAXSTRLEN];
+	char address[MAXSTRLEN];
+	int numbikes;
+	char biketype;
+	char goodrisk;
+	float amount;
+};
+
+Customer recvorder();
+void shipslip(Customer);
+
+int main()
+{
+	Customer client;
+	client = recvorder();
+	shipslip(client);
+
+	return 0;
+}
+
+//enter a order
+//precondition: require Mprice, which is the price of a mountain bike
+//				and SPRICE, which is the price of the street bike
+
+Customer recvorder()
+{
+	Customer record;	//record is local ot this function
+	char btype = 'N';
+	char risk = 'U';
+	float price;
+
+	cout << endl << "Enter customer information: ";
+	cout << endl << "Name: ";
+	cin.getline(record.name, MAXSTRLEN);
+	cout <<  endl << "Address: ";
+	cin.getline(record.address, MAXSTRLEN);
+	cout << endl << "How many bicycles are ordered?";
+	cin >> record.numbikes;
+	cout << "Type of Bicycle ordered: ";
+
+		while (!((btype == 'M') || (btype == 'S')))
+		{
+			cout << endl << "M Mountain";
+			cout << endl << "S street";
+			cout << endl << "Choose one (M or S): ";
+			cin >> btype;
+			btype = (btype);
+		}
+
+		if (btype == 'M')
+			price = MPRICE;
+		else if (btype == 'S')
+			price = SPRICE;
+
+		record.amount = record.numbikes * price;
+		record.biketype = btype;
+
+		while (!((risk == 'Y') || (risk == 'N')))
+		{
+			cout << endl << "Is this person good risk (Y or N): ";
+			cin >> risk;
+			risk = toupper(risk);
+		}
+
+		record.goodrisk = risk;
+
+		return record;
+}
+
+void shipslip(Customer record)
+{
+	cout << endl << "Shipping instruction: ";
+	cout << endl << "To: " << record.name;
+	cout << endl << record.address;
+	cout << endl << "Ship:  " << record.numbikes;
+	if (record.biketype == 'M')
+		cout << " Mountain Bikes";
+	else if(record.biketype == 'S')
+		cout << " Street Bikes";
+
+	cout << setw(6)
+		<< setiosflags(ios::fixed)
+		<< setiosflags(ios::showpoint)
+		<< setprecision(2);
+
+	if (record.goodrisk == 'Y')
+		cout << endl << "by freight, and bill the customer $"
+		<< record.amount << endl;
+	else
+		cout << endl << "C.O.D Amount due on delivery = $"
+		<< record.amount << endl;
+}

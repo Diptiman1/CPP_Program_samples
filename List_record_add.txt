@@ -1,0 +1,74 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+const int MAXSIZE = 20;
+const int MAXNAME = 30;
+const int MAXTEL = 16;
+int cnt = 0;
+struct TeleType
+{
+	char Name[MAXNAME];
+	char phnNo[MAXTEL];
+};
+
+TeleType populate(TeleType *[MAXSIZE]);
+void dispOne(TeleType *);
+
+int main()
+{
+	int i=0;
+	char key;
+	TeleType Record[MAXSIZE];
+	TeleType *recPoint;
+	
+		cout << "Do you wish to create a new record(respond with y or n): ";
+		cin >> key;
+		do
+		{
+			if (key == 'y')
+			{
+				key = cin.get();
+				recPoint = new TeleType;
+				Record[i] = populate(recPoint);
+				i++;
+
+
+			}
+			else
+				cout << "No record has been created: ";
+
+			cout << "Do you wish to create a new record(respond with y or n): ";
+			cin >> key;
+		
+		} while (key == 'y'); 
+		//key = cin.get();
+		
+		cnt = i;
+		dispOne(&Record[MAXSIZE]);
+		return 0;
+
+}
+
+TeleType populate(TeleType *record)
+{
+	cout << "Enter a name: "<<endl;
+	cin.getline(record->Name,MAXNAME);
+	//cin >> record->Name[MAXNAME];
+	cout << endl << "Enter the phone number: ";
+	cin.getline(record->phnNo, MAXTEL);
+	return *record;
+}
+
+void dispOne(TeleType *contents[])
+{
+	int j;
+	/*cout << "The content of the record just created is: " << endl
+		<< "Name: " << contents->Name << endl
+		<< "Phone Number: " << contents->phnNo << endl;*/
+	for (j = 0; j < cnt; j++)
+	{
+		cout << contents[j]->Name << endl << contents[j]->phnNo <<endl;
+	}
+}

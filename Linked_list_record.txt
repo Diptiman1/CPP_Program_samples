@@ -1,0 +1,65 @@
+#include <iostream>
+#include<iomanip>
+
+using namespace std;
+const int MAXNAME = 30;
+const int MAXTEL = 16;
+const int MAXRECS = 4;
+
+struct TeleType
+{
+	char name[MAXNAME];
+	char phnNo[MAXTEL];
+
+	TeleType *nextaddr;
+};
+
+void populate(TeleType *);
+void display(TeleType *);
+
+int main()
+{
+
+	int i;
+	TeleType *list, *current;		//two pointer to structures of type TeleType
+
+	//get pointer to the first structure in the list
+
+	list = new TeleType;
+	current = list;
+
+	//populate the current structure and create the remaining structures
+	for (i = 0; i < MAXRECS - 1; i++)
+	{
+		populate(current);
+		current->nextaddr = new TeleType;
+		current = current->nextaddr;
+	}
+
+	populate(current);
+	current->nextaddr = NULL;
+	cout << endl << "The list consists of the following record: " << endl;
+	display(list);//display the structure
+	
+}
+
+void populate(TeleType *record)
+{
+	cout << "Enter a name: ";
+	cin.getline(record->name, MAXNAME);
+	cout << "Enter the phone number: ";
+	cin.getline(record->phnNo, MAXTEL);
+}
+
+void display(struct TeleType *contents)
+{
+	while (contents != NULL)
+	{
+		cout << endl << setiosflags(ios::left)
+			<< setw(30) << contents->name
+			<< setw(20) << contents->phnNo;
+		contents = contents->nextaddr;
+	}
+
+	cout << endl;
+}

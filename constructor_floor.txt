@@ -1,0 +1,61 @@
+#include<iostream>
+const int MAXFLOOR = 15;
+
+using namespace std;
+
+class elevator
+{
+	private:
+		int currentFloor;
+	public:
+		elevator(int = 1);
+		void request(int);
+};
+
+elevator::elevator(int cFloor)
+{
+	currentFloor = cFloor;
+}
+
+void elevator::request(int newfloor)
+{
+	if (newfloor < 1 || newfloor > MAXFLOOR || newfloor == currentFloor);
+	else if (newfloor > currentFloor)
+	{
+
+		cout << "\n strating at floor " << currentFloor << endl;
+		while (newfloor > currentFloor)
+		{
+			currentFloor++;
+			cout << "Going up - now at floor  " << currentFloor << endl;
+
+
+		}
+
+		cout << " Stopping at Floor " << currentFloor << endl;
+	}
+	else
+	{
+		cout << "\n strating at floor " << currentFloor << endl;
+		while (newfloor < currentFloor)
+		{
+			currentFloor--;
+			cout << "Going down - now at floor  " << currentFloor << endl;
+
+
+		}
+
+		cout << " Stopping at Floor " << currentFloor << endl;
+	}
+	return;
+}
+
+int main()
+{
+
+	elevator a;
+	a.request(6);
+	a.request(3);
+
+	return 0;
+}

@@ -1,0 +1,54 @@
+
+//Given an array of size n-1 and given that there are numbers from 1 to n with one missing,
+// the missing number is to be found.
+//Print the missing number in array.
+
+#include<iostream>
+
+using namespace  std;
+
+int main()
+{
+	int tc = 0;
+	int size = 0;
+	int output[200] = { NULL };
+	int t = 0;
+	cout << "Enter the no. of test cases(not more than 200): " << endl;
+	cin >> tc;
+
+
+	for (int i = 0; i < tc; i++)
+	{
+		int flag = 1;
+		cout << "Enter the size of the array of intergers: " << endl;
+		cin >> size;
+
+		int *arr = new int[size];
+		cout << "Enter the array elements: " << endl;
+
+		for (int j = 0; j < size; j++)
+		{
+			cin >> arr[j];
+		}
+
+		for (int j = 1; j <= size; j++)
+		{
+			if (arr[j - 1] == flag++) continue;
+			else {
+				if ((arr[j - 1]) != 0) {
+					output[t] = flag - 1; t++;
+					flag++;
+				}
+			}
+		}
+
+	}
+
+	cout << endl << endl;
+	int i = 0;
+	while (*(output + i) != 0) {
+	cout << *(output + i) << endl;
+	i++;
+	}
+
+}

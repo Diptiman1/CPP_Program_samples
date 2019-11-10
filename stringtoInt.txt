@@ -1,0 +1,49 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+
+int main() {
+	/* Enter your code here. Read input from STDIN. Print output to STDOUT */
+	int N = 0;
+	//cin >> N;
+	string input;// = { NULL };
+	int j = 0;
+	int a[1000] = { 0 };
+	cin >> N;
+	cin.ignore();
+	//getline(cin, N);
+	getline(cin, input);
+	for (int i = 0; i < sizeof(input); i++)
+	{
+		if (input[i] == 32)
+		{
+
+			j++;
+		}
+
+		else if (input[i] == '\0') { break; }
+		else {
+			a[j] = (a[j] * 10) + (input[i] - 48);
+		}
+
+	}
+
+	/*if ((j+1) != N) { cout << "Error: No. of entry is not same as required!!"; }
+	else {*/
+	for (int i = j; i >= 0; i--)
+	{
+		cout << a[i] << " ";
+
+	}
+	//}
+	cout << endl;
+	//stringstream(input) >> hour >> symbol >> min;
+	//cout << input[1] << endl;
+	return 0;
+
+}

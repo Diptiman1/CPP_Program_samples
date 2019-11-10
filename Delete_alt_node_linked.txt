@@ -1,0 +1,71 @@
+//Delete alternate nodes of a Linked List
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct List
+{
+	struct List* next;
+	int data;
+};
+List * start = NULL;
+
+struct List* createList(List* head)
+{
+	int a = 0;
+	head->next = (List*)malloc(sizeof(int));
+	head = head->next;
+	scanf("%d", &a);
+	head->data = a;
+	//head = head->next;
+	return head;
+}
+void printData(List *node)
+
+{
+	node = node->next;
+	while (node != NULL)
+	{
+		printf("%d ", node->data);
+		node = node->next;
+	}
+	printf("\n");
+}
+void DeleteAlternateNode(List *node)
+{
+	List * prev = node;
+	node = node->next;
+
+	while ((node != NULL))
+	{
+		//List* deleteNOde = node->next;
+		if (node->next == NULL) break;
+		node->next = node->next->next;
+		//free(deleteNOde);
+		node = node->next;
+	}
+
+	printData(start);
+}
+
+int main()
+{
+	int i = 0;
+	int n = 4;
+	struct List *head = NULL;
+	head = (List*)malloc(sizeof(int));
+	start = head;
+	printf("Enter the values \n");
+	for (i = 0; i < n; i++) {
+		head = createList(head);
+
+	}
+
+	head->next = NULL;
+	//	head->next->data = NULL;
+
+	printData(start);
+	DeleteAlternateNode(start);
+
+
+}

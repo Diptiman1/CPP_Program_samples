@@ -1,0 +1,100 @@
+#include<iostream>
+
+
+using namespace std;
+
+const int MAXSTACK = 100;
+const int TRUE = 1;
+const int FALSE = 0;
+
+// class declaration
+
+//predictions: required the MAXSTACK, the maximum size of the stack is required
+//				:requires that true be defined as non zero integer
+//				:requires the false be defined as 0
+
+class Stack
+{
+private:
+	int top;
+	int num[MAXSTACK];
+
+public:
+	Stack();
+	void push(int);
+	int pop();
+	int isEmpty();
+	int isFull();
+};
+
+
+Stack::Stack()
+{
+	top = -1;
+}
+
+void Stack::push(int value)
+{
+	top++;
+	num[top] = value;
+}
+
+int Stack::pop()
+{
+	int topValue;
+	topValue = num[top];
+	top--;
+	return(topValue);
+}
+
+int Stack::isEmpty()
+{
+	if (top == -1)
+	{
+		return TRUE;
+	}
+	else return FALSE;
+}
+int Stack::isFull()
+{
+	if (top == (MAXSTACK - 1))
+		return TRUE;
+	else
+		return FALSE;
+}
+
+int main()
+{
+	Stack digit;
+	int newnum;
+
+	cout << "Enter the digit of your choice: one per line: "
+		<< endl << "To stop entering digit enter value greater than 9" << endl;
+
+	while (1)
+	{
+		cout << "Enter a digit: ";
+		cin >> newnum;
+		if (newnum > 9)
+			break;
+
+		if (digit.isFull())
+		{
+			cout << endl << "No more storage allocatio space"
+				<< endl << "Didn't Enter the last number you entered ";
+			break;
+
+		}
+		else
+			digit.push(newnum);
+	}
+
+	cout << "\n The values poped from the stacks are: "
+		<< endl;
+	while (!digit.isEmpty())
+	{
+		cout << digit.pop() << endl;
+	}
+	return 0;
+}
+

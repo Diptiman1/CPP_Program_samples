@@ -1,0 +1,67 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+const int MAXSIZE = 20;
+const int MAXNAME = 30;
+const int MAXTEL = 16;
+
+struct TeleType
+{
+	char name[MAXNAME];
+	char phoneNo[MAXTEL];
+
+	TeleType *nextaddr;
+};
+
+void display(TeleType*, char*);
+
+int main()
+{
+	const int MAXSIZE = 20;
+	char name[MAXSIZE];
+	TeleType t1 = { "Diptiman", "6825519066" };
+	TeleType t2 = { "Argha","6826478542" };
+	TeleType t3 = { "Sawon","6821118559" };
+
+	TeleType *first;
+	first = &t1;
+	t1.nextaddr = &t2;
+	t2.nextaddr = &t3;
+	t3.nextaddr = NULL;
+
+	cout << "Enter the name you wan to search: " << endl;
+	cin >> name;
+
+	display(first, name);
+	return 0;
+}
+
+void display(TeleType *contents, char* name1)
+{
+	char* Name_new[MAXSIZE] ;
+	char ph_no[MAXSIZE] = { '\0' };
+	int flag = 0;
+
+	
+	while (contents != NULL)
+	{
+
+		cout << endl << setiosflags(ios::left)
+			<< setw(30) << contents->name
+	<< setw(20) << contents->phoneNo;
+
+		if (strcmp(name1, contents->name) == 0)
+		{
+			flag = 1;
+			Name_new[MAXSIZE] = contents->phoneNo;
+			//break;
+		}
+
+		contents = contents->nextaddr;
+	}
+	
+	cout << endl << "record Exists " << endl;
+	cout << endl << "phone no is " << Name_new[MAXSIZE] << endl;
+	}

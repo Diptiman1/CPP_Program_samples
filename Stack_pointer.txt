@@ -1,0 +1,105 @@
+#include<iostream>
+#include<string.h>
+#include<ctype.h>
+#include<iomanip>
+
+
+using namespace std;
+const int MAXCHARS = 30;
+const int TRUE = 1;
+const int FALSE = 0;
+
+//Class declaration
+//Preconditions: required that MAXCHARS, the maximum size of the name be defined
+//				: requires theTRUE to be non zero integer
+
+class Stack
+{
+private:
+	struct NameRec
+	{
+		char name[MAXCHARS];
+		NameRec *prioraddr;
+	};
+	NameRec *top;
+public:
+	Stack();
+	void push(char *);
+		char *pop();
+	int isEmpty();
+};
+
+//Implementation
+Stack::Stack()
+{
+	top = NULL;
+}
+
+void Stack::push(char *newName)
+{
+	//NameRec *newAddr = new(NameRec);
+	NameRec *newAddr;
+	newAddr = new(NameRec);
+	if (newAddr == NULL)
+	{
+		cout << endl << "No more storage space";
+		cout << endl << "The last name has not been entered on the stack: ";
+		cout << endl;
+	}
+	else
+	{
+		strcpy(newAddr->name, newName);
+		newAddr->prioraddr = top;
+		top = newAddr;
+	}
+}
+
+char *Stack::pop()
+{
+	NameRec *tempAddr;
+	char name[MAXCHARS];
+
+	strcpy(name, top->name);
+	tempAddr = top->prioraddr;
+	delete(top);
+	top = tempAddr;
+	return name;
+}
+
+int Stack::isEmpty()
+{
+	if (top == NULL)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+int main()
+{
+	char newName[MAXCHARS];
+	char popName[MAXCHARS];
+	Stack namestack;
+	cout << "Enter as many as you wish, one per line"
+		<< endl << "To stop entering name enter a single x" << endl;
+	while (1)
+	{
+		cout << "Enter a name: ";
+	cin.getline(newName, MAXCHARS);
+	if (strcmp(newName, "x") == 0)
+
+		break;
+	else
+		namestack.push(newName);
+	
+	}
+
+	//pop and display name from the stack
+	cout << endl << "The name poped from the stacks are: " << endl;
+	while (!(namestack.isEmpty()))
+	{
+		strcpy(popName, namestack.pop());
+
+		cout << popName << endl;
+	}
+	return 0;
+}

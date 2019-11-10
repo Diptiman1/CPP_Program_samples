@@ -1,0 +1,93 @@
+#include<iostream>
+
+using namespace std;
+
+struct Node
+{
+	int data;
+	Node *next;
+};
+
+Node *list()
+{
+	Node *n = NULL, *head = NULL;
+	int number = 0;
+	n = new Node;
+	head = n;
+	cout << "Enter the first set of numbers:";
+	cin >> number;
+
+	while (number != 0)
+	{
+		n->data = number % 10;
+		number = number / 10;
+		n->next = new Node;
+		n = n->next;
+		n->next = NULL;
+		n->data = NULL;
+	}
+	
+	return head;
+
+}
+
+Node* reverse_list(Node *head)
+{
+	Node *prev = NULL;
+	Node *current = head;
+	Node *next = NULL;
+
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+
+	head = prev;
+
+	return head;
+
+}
+
+void insert_alternate(Node * h1, Node *h2)
+{
+	Node *head1 = h1;
+	Node *head2 = h2;
+	Node *first;
+	Node *second;
+	Node *temp1,*temp2;
+	
+	while (h2!=NULL)
+	{
+		temp1 = h1->next;
+		h1->next = h2;
+		temp2 = h2->next;
+		h2->next = temp1;
+		h1 = h2->next;
+		h2 = temp2;
+	}
+
+	head1 = reverse_list(head1);
+
+	while (head1 != NULL)
+	{
+		cout << head1->data;
+		head1 = head1->next;
+	}
+	cout << endl;
+}
+
+
+int main()
+{
+	Node *head1, *head2;
+
+	head1 = list();
+	head2 = list();
+
+
+	insert_alternate(head1, head2);
+
+}

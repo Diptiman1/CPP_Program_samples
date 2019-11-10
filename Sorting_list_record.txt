@@ -1,0 +1,106 @@
+#include<iostream>
+#include<iomanip>
+#include<string.h>
+
+using namespace std;
+
+const int MAXNAME = 30;
+const int ARRAYSIZE =5;
+
+struct PayRecord
+{
+	long Id;
+	char name[MAXNAME];
+	float rate;
+};
+
+// function protype needed by main();
+
+void selSort(PayRecord [], int);
+void display(PayRecord[], int);
+void linearSerach(PayRecord[], int, float);
+
+
+int main()
+{
+
+	PayRecord Employee[ARRAYSIZE];
+	int i;
+	for (i = 0; i < 5; i++)
+	{
+		cout << "Enter the 5 digit ID" << endl;
+		cin >> Employee[i].Id;
+
+		cout << "Enter the Employee Name" << endl;
+		cin >> Employee[i].name;
+
+		cout << "Enter the Employee Rate" << endl;
+		cin >> Employee[i].rate;
+	}
+	float cutRate;
+	selSort(Employee, ARRAYSIZE);
+	display(Employee, ARRAYSIZE);
+	cout << endl << "Enter the cutoff payrate: ";
+	cin >> cutRate;
+	linearSerach(Employee, ARRAYSIZE, cutRate);
+	return 0;
+}
+	
+void selSort(PayRecord array[], int nume1)
+{
+	int i, j, minidx;
+	char minstrng[MAXNAME];
+	PayRecord temp;
+
+	for (i = 0; i < (nume1 - 1); i++)
+	{
+		strcpy(minstrng, array[i].name);
+		minidx = i;
+		for (j = i + 1; j < nume1; j++)
+		{
+			if (strcmp(array[i].name, minstrng) < 0)
+			{
+				strcpy(minstrng, array[i].name);
+				minidx = j;
+
+			}
+		}
+			if (strcmp(minstrng, array[i].name) < 0)
+			{
+				temp = array[i];
+				array[i] = array[minidx];
+				array[minidx] = temp;
+			}
+
+		}
+}
+
+void linearSerach(PayRecord array[], int arrsize, float minrate)
+{
+	int i;
+	cout << endl << "The employyes making than this rate are: ";
+	for (i = 0; i < arrsize; i++)
+
+	{
+
+		if (array[i].rate < minrate)
+
+		{
+
+			cout << endl << "ID: " << array[i].Id << setw(20) << setiosflags(ios::left) << array[i].name << endl;
+		}
+	}
+}
+
+void display(PayRecord array[], int nume1)
+{
+	int i;
+	cout << endl << "The sorted array of stucture is: ";
+	for (i = 0; i < nume1; i++)
+
+	{
+		cout << endl << "ID: " << array[i].Id << setw(20) << setiosflags(ios::left) << array[i].name
+			<< setw(8) << setprecision(2) << array[i].rate << endl;
+
+	}
+}

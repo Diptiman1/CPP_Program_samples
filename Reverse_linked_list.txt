@@ -1,0 +1,41 @@
+#include<iostream>
+
+using namespace std;
+
+struct node
+{
+	int data;
+	node *next;
+};
+
+node* reverse(node *head)
+{
+	node *current, *next, *prev;
+	prev = NULL;
+	current = head;
+
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+
+	}
+
+	head = prev;
+
+	return head;
+}
+
+int main()
+{
+	node *head1;
+
+	
+	reverse(head1);
+
+
+	return 0;
+
+}

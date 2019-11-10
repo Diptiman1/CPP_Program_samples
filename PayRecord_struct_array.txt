@@ -1,0 +1,40 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+const int MAXNAME = 20;
+
+struct payRecord
+{
+	long empID;
+	char empName[MAXNAME];
+	float rate;
+};
+
+
+int main()
+{
+
+	const int NUMERAC = 5;
+	//payRecord Employee[NUMERAC];
+	int i;
+	payRecord Employee[NUMERAC] = {
+		{2315, "Diptiman", 30.2},
+		{ 2316, "Argha", 32.5 },
+		{ 2317, "Sawon", 48.5 },
+		{ 2318, "Biswa", 46.5 },
+		{ 2319, "Soham", 55.8 },
+		
+	};
+
+	cout << endl << setiosflags(ios::left); // left justify the output
+
+	for (i = 0; i < NUMERAC; i++)
+	{
+		cout << setw(5) << Employee[i].empID;
+		cout << setw(10) << Employee[i].empName;
+		cout << setw(6) << Employee[i].rate << endl;
+	}
+	return 0;
+}

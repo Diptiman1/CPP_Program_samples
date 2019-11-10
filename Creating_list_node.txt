@@ -1,0 +1,59 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+
+const int MAXSIZE = 5;
+struct TeleType
+{
+	int a;
+	TeleType *nodeptr;
+};
+
+
+TeleType *AddAddr(TeleType *Record, int data1)
+{
+	TeleType *recPnt = new TeleType;
+	recPnt->a = data1;
+	recPnt->nodeptr = Record;
+
+	return recPnt;
+}
+
+void printInorder(TeleType* node)
+{
+	if (node == NULL)
+		return;
+
+	/* first recur on left child */
+	printInorder(node->nodeptr);
+
+	/* then print the data of node */
+	cout << node->a <<endl;
+
+
+}
+
+int main()
+{
+	int data;
+	int i = 0;
+	//char key;
+	//TeleType Record[MAXSIZE];
+	TeleType *recPoint;
+	TeleType *root;
+	recPoint = NULL;
+	//root = NULL;
+	
+	for (i = 0; i < 5; i++) {
+		cout << "enter Value " << endl;
+		cin >> data;
+
+
+		recPoint = AddAddr(recPoint, data);
+	}
+	
+	printInorder(recPoint);
+
+}

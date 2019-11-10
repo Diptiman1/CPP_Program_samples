@@ -1,0 +1,135 @@
+#include<iostream>
+
+
+using namespace std;
+
+struct Word
+{
+	Word *node;
+	char data;
+};
+
+int count1 = 0, count2 = 0;
+
+Word* list1() 
+{
+	char word[10];
+	Word *n = NULL, *head_list_1 = NULL, *comphead;
+	n = new Word;
+	int i = 0;
+	//i = sizeof(word);
+	head_list_1 = n;
+	
+	cout << "please enter the string in char one by one" << endl;
+	cin >> word;
+	//word = "geeks";
+
+
+	while (1)
+	{
+
+		n->data = word[i];
+		if (n->data == '\0')
+		{
+			n->node = NULL;
+			break;
+
+		}
+
+		n->node = new Word;
+		n = n->node;
+		i++;
+	}
+	count1 = i;
+	return head_list_1;
+}
+
+Word* list2()
+{
+	char word[10];
+	Word *n = NULL, *head_list_2 = NULL, *comphead;
+	n = new Word;
+	int i = 0;
+	//i = sizeof(word);
+	head_list_2 = n;
+
+	cout << "please enter the string in char one by one" << endl;
+	cin >> word;
+	//word = "geeks";
+
+
+	while (1)
+	{
+
+		n->data = word[i];
+		if (n->data == '\0')
+		{
+			n->node = NULL;
+			break;
+
+		}
+
+		n->node = new Word;
+		n = n->node;
+		i++;
+	}
+	count2 = i;
+	return head_list_2;
+}
+void strcmp1(Word *head1, Word*head2)
+{
+	int flag = 0;
+	while (1)
+	{
+
+		if (count1 > count2)
+		{
+			flag = 1; break;
+		}
+		else if (count1 < count2)
+		{
+			flag = -1; break;
+		}
+
+		else
+		{
+			while (head1 != NULL)
+			{
+				if (head1->data == head2->data)
+				{
+					head1 = head1->node;
+					head2 = head2->node;
+					continue;
+				}
+				else
+				{
+					flag = -1;
+					break;
+				}
+
+			}
+			break;
+		}
+	}
+
+	cout << " " << flag << " " << endl;
+
+	//Enter the sring to compare
+}
+
+int main()
+{
+	while (1)
+	{
+
+		Word *head1, *head2;
+		
+		head1 = list1();
+		head2 = list2();
+
+		strcmp1(head1, head2);
+	}
+
+
+}
+

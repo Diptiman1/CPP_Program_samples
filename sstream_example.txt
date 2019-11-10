@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<iostream>
+#include<sstream>
+
+using namespace std;
+
+int main()
+{
+	int b;
+	char a[5] = "2a";
+	stringstream int1;
+	int1 << hex << a;
+	int1 >> b;
+	stringstream converter;
+
+
+
+
+
+	converter << "Dec value " << b << " Hex : " << hex << b << " Octal: " << oct << b;
+	cout  << converter.str() << endl;
+}

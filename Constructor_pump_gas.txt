@@ -1,0 +1,74 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+const float AMT_IN_TANK = 300;
+const float TODAYS_PRICE = 1.25;
+
+class Pump
+{
+private:
+	float amtInTank;
+	float price;
+
+public: 
+	Pump(float = 500.0, float = 1.00);
+		void values();
+	void request(float);
+
+
+};
+
+Pump::Pump(float start, float todaysPrice)
+{
+	amtInTank = start;
+	price = todaysPrice;
+}
+
+void Pump::values()
+{
+	cout << setiosflags(ios::fixed) << setiosflags(ios::showpoint)
+		<< setprecision(2) << endl;
+
+	cout << "The gas tank has " << amtInTank << "gallons of gas" << endl;
+	cout << "The price per Gallon of Gas is $" << price<< endl;
+
+	return;
+}
+
+void Pump::request(float pumpAmt)
+{
+	float pumped;
+
+	if (amtInTank >= pumpAmt)
+		pumped = pumpAmt;
+	else
+		pumped = amtInTank;
+	amtInTank -= pumped;
+
+	cout << setiosflags(ios::fixed) << setiosflags(ios::showpoint)
+		<< setprecision(2) << endl;
+	cout << pumpAmt << "gallons were requested" << endl;
+	cout << pumped << "gallons were pumped" << endl;
+	cout << amtInTank << "gallons remain in the tank" << endl;
+	cout << "The total price is $" << (pumped  * price) << endl;
+
+	return;
+
+
+}
+
+
+int main()
+{
+	Pump a(AMT_IN_TANK, TODAYS_PRICE);
+	a.values();
+
+	cout << endl;
+
+	a.request(30.0);
+	cout << endl;
+	a.request(280.0);
+
+	return 0;
+}

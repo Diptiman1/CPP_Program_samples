@@ -1,0 +1,53 @@
+
+//Static class members
+	
+
+#include<iostream>
+
+using namespace std;
+
+class Employee
+{
+private:
+
+	static float taxRate;
+	int idNum;
+public:
+
+	Employee(int = 0);
+	void display();
+	static void disp();
+};
+//static memeber definition
+float Employee::taxRate = 0.0025;
+//implementation section
+
+Employee::Employee(int num)
+{
+	idNum = num;
+}
+
+void Employee::display()
+{
+	cout << "Employee number " << idNum
+		<< " has a tax rate of " << taxRate << endl;
+	return;
+}
+
+void Employee::disp()
+{
+	cout << "The static rate is " << taxRate << endl;
+
+	return;
+}
+
+int main()
+{
+	Employee::disp();
+
+	Employee emp1(11122), emp2(11133);
+	emp1.display();
+	emp2.display();
+
+	return 0;
+}

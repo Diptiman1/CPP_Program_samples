@@ -1,0 +1,53 @@
+
+#include<iostream>
+
+
+using namespace std;
+
+struct Word
+{
+	Word *node;
+	char data;
+};
+
+
+int main()
+{
+	char word[10];
+	Word *n = NULL, *head = NULL, *head1;
+	n = (Word*)malloc(sizeof(char));
+	//n = new Word;
+	int i = 0;
+	//i = sizeof(word);
+	head = n;
+
+	cout << "please enter the string in char one by one" << endl;
+	cin >> word;
+	//word = "geeks";
+
+
+	while (1)
+	{
+
+		n->data = word[i];
+		if (n->data == '\0')
+		{
+			n->node = NULL;
+			break;
+
+		}
+
+		n->node = new Word;
+		n = n->node;
+		i++;
+	}
+
+	while (head != NULL)
+	{
+		cout << head->data;
+		head = head->node;
+	}
+
+	cout << endl;
+}
+

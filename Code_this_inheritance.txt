@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+class base1
+{
+public:
+	void height1(int h)
+	{
+	  int height = 0;
+	  this->height = h;
+	}
+
+	void width1(int w)
+	{
+		 int width = 0;
+		this->width = w;
+	}
+protected:
+	int height;
+	int width;
+};
+
+class child1 : public base1
+
+{
+public:
+	int cal_area() {
+		int area = 0;
+			area = height*width;
+		return area;
+	}
+	};
+
+int main() 
+{
+	int a;
+	
+	child1 rect;
+	rect.height1(5);
+	rect.width1(7);
+    a = rect.cal_area();
+	cout << a << endl;
+
+	return 0;
+}

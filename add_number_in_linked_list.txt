@@ -1,0 +1,121 @@
+#include<iostream>
+using namespace std;
+
+struct Number
+{
+	Number *Node;
+	int data;
+};
+
+Number* reverse_list(Number *head)
+{
+	Number *prev = NULL;
+	Number *current = head;
+	Number *next = NULL;
+
+	while (current != NULL)
+	{
+		next = current->Node;
+		current->Node = prev;
+		prev = current;
+		current = next;
+	}
+
+	head = prev;
+
+	return head;
+
+}
+
+Number *number()
+{
+
+	int number, digit;
+
+	Number *head;
+	cout << "Enter the number:" << endl;
+	cin >> number;
+	Number *n = new Number;
+	head = n;
+
+	while ((number) != 0)
+	{
+
+		digit = number % 10;
+		number = number / 10;
+		n->data = digit;
+		n->Node = new Number;
+		n = n->Node;
+		n->Node = NULL;
+		n->data = 0;
+
+	}
+	
+
+	return head;
+}
+
+Number* get_sum(Number *num1, Number *num2)
+{
+	Number *sum = NULL, *s_head = NULL;
+	sum = new Number;
+	s_head = sum;
+	int s = 0, carry = 0;
+	while (1)
+	{
+		s = num1->data + num2->data + carry;
+		sum->data = s % 10;
+		carry = s / 10;
+		sum->Node = new Number;
+		sum = sum->Node;
+
+		if (num1->Node == NULL && num2->Node == NULL)
+		{
+			sum->Node = NULL;
+			sum->data = 0;
+			break;
+		}
+		if (num1->Node == NULL)
+		{
+			num1->data = 0;
+		}
+		else { num1 = num1->Node; }
+		if (num2->Node == NULL)
+		{
+			num2->data = 0;
+		}
+		else { num2 = num2->Node; }
+
+	}
+	return s_head;
+}
+
+void print_sum(Number *s_head)
+{
+	cout << endl;
+	while (s_head != NULL)
+	{
+
+		cout << s_head->data;
+		s_head = s_head->Node;
+	}
+
+	cout << endl;
+}
+
+int main()
+{
+	Number *num1 = NULL, *num2 = NULL, *sum_head = NULL;
+
+	num1 = number();
+	num2 = number();
+	// add
+
+	sum_head = get_sum(num1, num2);
+	sum_head=reverse_list(sum_head);
+
+
+	print_sum(sum_head);
+}
+
+

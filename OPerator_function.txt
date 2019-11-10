@@ -1,0 +1,74 @@
+#include<iostream>
+#include<iomanip>
+
+
+using namespace std;
+class Date
+{
+private:
+	int month;
+	int day;
+	int year;
+
+public:
+	Date(int = 0, int = 0, int = 0);
+	Date operator+(int);
+	void showdate();
+
+};
+
+//implementation section
+
+Date::Date(int mm, int dd, int yyyy)
+{
+	month = mm;
+	day = dd;
+	year = yyyy;
+}
+
+Date Date::operator+(int days)
+{
+	Date temp;
+
+	temp.day = day+days;
+	temp.month = month;
+	temp.year = year;
+	while (temp.day > 30)
+	{
+		temp.month++;
+		temp.day -= 30;
+	}
+
+	while (temp.month > 12)
+	{
+		temp.year++;
+		temp.month -= 12;
+
+	}
+	return temp;
+}
+
+void Date::showdate()
+{
+	cout << setfill('0');
+	cout << setw(2) << month << '/'
+		<< setw(2) << day << '/'
+		<< setw(2) << year % 100;
+	cout << endl;
+
+	return;
+}
+
+int main()
+{
+	Date a(4, 1, 1999), b;
+
+	cout << "The initial date is ";
+	a.showdate();
+	b = a + 865;
+
+	cout << "The new date is ";
+	b.showdate();
+
+	return 0;
+}

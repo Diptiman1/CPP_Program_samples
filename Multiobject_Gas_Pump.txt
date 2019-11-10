@@ -1,0 +1,125 @@
+#include<stdlib.h>
+#include<time.h>
+
+//Class declaration and implementation
+
+class Customer
+{
+public:
+	Customer(void) { srand(time(NULL)); };
+
+	int arrive(void) { return(1 + rand() % 16); };
+	int gallons(void) { return(3 + rand() % 21); };
+
+};
+
+---------------------------------------------------------------------------------------------------------
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+class Pump
+{
+private:
+
+	float amtInTank;
+	float price;
+public:
+	Pump(float = 500.0, float = 1.00);
+	void values(void);
+	void request(float);
+};
+
+Pump::Pump(float start, float TodaysPrice)
+{
+	amtInTank = start;
+	price = TodaysPrice;
+}
+
+void Pump::values()
+{
+	cout << setiosflags(ios::fixed)
+		<< setiosflags(ios::showpoint)
+		<< setprecision(2) << endl;
+
+	cout << "The price per gallon of gas is $" << price << endl;
+
+	return;
+
+}
+
+void Pump::request(float pumpAmt)
+{
+	float pumped;
+
+	if (amtInTank >= pumpAmt)
+		pumped = pumpAmt;
+	else
+		pumped = amtInTank;
+
+	amtInTank -= pumped;
+	cout << setiosflags(ios::fixed)
+		<< setiosflags(ios::showpoint)
+		<< setprecision(2) << endl;
+
+	cout << pumpAmt << " galon were requested " << endl;
+	cout << pumped << " gallons remain in the Tank " << endl;
+	cout << " The Total price is $" << (pumped + price) << endl;
+
+	return;
+}
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+#include<iostream>
+#include<iomanip>
+
+#include"Pump.h"
+#include"Customer.h"
+
+using namespace std;
+
+const float SIMTIME = 0.5;
+const int MINUTES = 70;
+const float AMT_IN_TANK = 300;
+const float TODAYS_PRICE = 1.25;
+
+int main()
+{
+	Pump a(AMT_IN_TANK, TODAYS_PRICE);
+	Customer b;
+	int totalTime = 0;
+	int idleTime;
+	int amtRequest;
+	int SimMinutes; // simullation time in minutes
+
+	SimMinutes = SIMTIME * MINUTES;
+	cout << "\n Starting a simulation - simulation time is "
+		<< SimMinutes << " minutes " << endl;
+	a.values();
+
+	//get the first arrival
+	idleTime = b.arrive();
+	totalTime += idleTime;
+
+
+	while (totalTime <= SimMinutes)
+	{
+		cout << "\n The idle time is " << idleTime << " minutes " << endl;
+		amtRequest = b.gallons();
+		a.request(float(amtRequest));
+		//get the next arrival
+
+		idleTime = b.arrive();
+		totalTime += idleTime;
+	}
+
+	cout << "\n The idle Time is " << idleTime << " minutes " << endl;
+	cout << "As the total time now exceeds the simulation time, " << endl
+	<< "   this simulation run is over. " << endl;
+
+	return 0;
+}
+

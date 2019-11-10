@@ -1,0 +1,48 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+const int COUNT = 10;
+
+struct PayRecord
+{
+	long number;
+	char Name[COUNT];
+	float rate;
+	int hours;
+};
+
+int main()
+{
+	int i = 0;
+	const int COUNT1=6;
+	PayRecord Record[COUNT1] = {};
+
+	cout << "Enter the records according to instructions: " << endl;
+
+	for (i = 0; i < 6; i++)
+	{
+		cout << "Enter the Number: " << endl;
+		cin >> Record[i].number ;
+		cout << "Enter the Name: " << endl;
+		cin >> Record[i].Name;
+		cout << "Enter the rate: " << endl;
+		cin >> Record[i].rate;
+		cout << "Enter the Hours per week : " << endl;
+		cin >> Record[i].hours;
+	}
+	cout << endl;
+	cout << setiosflags(ios::left);
+
+	for (i = 0; i < 6; i++)
+	{
+		cout << setw(7) << Record[i].number;
+		cout << setw(10) << Record[i].Name;
+		cout << setw(5) << Record[i].rate;
+		cout << setw(3) << Record[i].hours;
+		cout << endl;
+	}
+
+return 0;
+}

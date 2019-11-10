@@ -1,0 +1,43 @@
+/*How to create a graph*/
+
+struct Edge 
+
+{
+	int src, dst;
+};
+
+struct Graph 
+{
+	int dtaV, dtaE;
+	Edge *edge;
+};
+
+Graph  *CreateGraph(int V, int E)
+{
+	Graph *Graph1 = new Graph;
+
+	Graph1->dtaE = E;
+	Graph1->dtaV = V;
+	Graph1->edge = new Edge;
+
+	return Graph1;
+
+}
+
+int main()
+
+{
+	Graph *graph;
+	int V = 3, E = 3;
+	graph = CreateGraph(V,E);
+
+	graph->edge[0].src = 0;
+	graph->edge[0].dst = 1;
+
+	graph->edge[1].src = 0;
+	graph->edge[1].dst = 1;
+
+	graph->edge[2].src = 0;
+	graph->edge[2].dst = 1;
+
+}

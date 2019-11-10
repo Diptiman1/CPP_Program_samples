@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+#include<time.h>
+#include<ctype.h>
+#include<stdint.h>
+#include<string.h>
+#include<vector>
+#include<iostream>
+
+using namespace std;
+
+int strcmp(const char* a, const char * b)
+{
+	int i = 0;
+	int flag = 0;
+
+	//cout << endl << *(b+4) <<" " << *(a+4) << endl;
+
+	while (*(a + i) != '\0')
+
+	{
+		if (*(a + i) < *(b + i)) { flag--; }
+		else if (*(a + i) == *(b + i))
+		{
+			i++;
+			continue;
+		}
+		else
+		{
+			flag++;
+		}
+		i++;
+	}
+
+	return flag;
+	/*if (flag < 0) return -1;
+	else if (flag == 0) return 0;
+	else if (flag > 0) return -1;*/
+
+}
+
+int main()
+{
+
+	char word1[10];
+	char word2[10];
+	while (1) {
+		cout << "Enter the two words" << endl;
+		cout << "Word1: "; cin >> word1;
+		cout << "Word2: "; cin >> word2;
+
+		cout << endl << strcmp(word1, word2) << endl;
+	}
+
+	return 0;
+}
+
+
